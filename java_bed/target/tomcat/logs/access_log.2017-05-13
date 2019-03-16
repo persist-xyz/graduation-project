@@ -1,0 +1,5 @@
+127.0.0.1 - - [13/May/2017:23:39:21 +0800] "POST /ssm/orderdetail/queryOrderDetailAll HTTP/1.1" 200 100479 http-bio-82-exec-2 2008
+127.0.0.1 - - [13/May/2017:23:39:26 +0800] "POST /ssm/user/queryByName HTTP/1.1" 200 234 http-bio-82-exec-3 510
+127.0.0.1 - - [13/May/2017:23:39:26 +0800] "POST /ssm/user/queryByName HTTP/1.1" 200 234 http-bio-82-exec-4 11
+127.0.0.1 - - [13/May/2017:23:39:30 +0800] "POST /ssm/menusort/queryMenuSortAll HTTP/1.1" 200 409 http-bio-82-exec-6 1913
+127.0.0.1 - - [13/May/2017:23:39:31 +0800] "POST /ssm/orderdetail/queryOrderDetailAll HTTP/1.1" 500 5041 http-bio-82-exec-5 4533

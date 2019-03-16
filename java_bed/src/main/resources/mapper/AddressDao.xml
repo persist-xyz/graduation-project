@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.soecode.lyf.dao.AddressDao">
+	<!-- 目的：为dao接口方法提供sql语句配置 -->
+
+	<select id="queryAddressAll" resultType="Address">
+		SELECT
+			receiver_address_id,
+			user_id,
+			receiver_address_username,
+			receiver_address_usertel,
+			receiver_address_useradr
+		FROM
+			receiver_address
+		WHERE
+			user_id = #{userid}
+	</select>
+
+	<insert id="addAddress">
+		INSERT INTO receiver_address (user_id,receiver_address_username,receiver_address_usertel,receiver_address_useradr)
+		VALUES (#{userid},#{receiver_address_username},#{receiver_address_usertel},#{receiver_address_useradr})
+	</insert>
+
+	<update id="updateAddress">
+		UPDATE receiver_address
+		SET user_id = #{userid},receiver_address_id = #{receiver_address_id},receiver_address_username = #{receiver_address_username},receiver_address_usertel = #{receiver_address_usertel} ,receiver_address_useradr =#{receiver_address_useradr}
+		WHERE user_id = #{userid} AND receiver_address_id = #{receiver_address_id}
+	</update>
+
+</mapper>

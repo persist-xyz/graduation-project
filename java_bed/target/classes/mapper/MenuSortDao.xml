@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.soecode.lyf.dao.MenuSortDao">
+	<!-- 目的：为dao接口方法提供sql语句配置 -->
+	<select id="queryMenuSortAll" resultType="MenuSort">
+		SELECT
+			ms_id,
+			seller_id,
+			ms_name
+		FROM
+			menu_sort
+		WHERE
+			seller_id = #{sellerId}
+	</select>
+
+	<insert id="addMenuSort">
+		INSERT INTO
+			menu_sort (seller_id,ms_name)
+		VALUES
+			(#{sellerId},#{msName})
+	</insert>
+
+	<update id="updateMenuSort">
+		UPDATE
+			menu_sort
+		SET
+			ms_name = #{msName}
+		WHERE
+			ms_name = #{msName} AND seller_id = #{sellerId}
+	</update>
+
+</mapper>

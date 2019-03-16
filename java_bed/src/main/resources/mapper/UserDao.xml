@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.soecode.lyf.dao.UserDao">
+	<!-- 目的：为dao接口方法提供sql语句配置 -->
+
+	<select id="queryUserAll" resultType="User">
+		SELECT
+		user_id,
+		user_name,
+		user_pwd,
+		user_tel,
+		user_adr,
+		user_type,
+		user_sellername,
+		user_avatar,
+		user_month_sale,
+		user_send_pay,
+		user_distribution_pay
+		FROM
+		users
+		WHERE
+		user_type = 1
+	</select>
+
+	<select id="queryUserById" resultType="User">
+		SELECT
+		user_id,
+		user_name,
+		user_pwd,
+		user_tel,
+		user_adr,
+		user_type,
+		user_sellername,
+		user_avatar,
+		user_month_sale,
+		user_send_pay,
+		user_distribution_pay
+		FROM
+		users
+		WHERE
+		user_id = #{userid}
+	</select>
+
+
+	<select id="queryByName" resultType="User" parameterType="String">
+		<!-- 具体的sql -->
+		SELECT
+			user_id,
+			user_name,
+			user_pwd,
+			user_tel,
+			user_adr,
+			user_type
+		FROM
+			users
+		WHERE
+			user_name = #{username} AND user_pwd = #{userpwd} AND user_type = #{usertype}
+	</select>
+
+	<insert id="addUser">
+		INSERT INTO users (user_name,user_pwd,user_tel,user_adr,user_type,user_sellername)
+		VALUES (#{username},#{userpwd},#{usertel},#{useradr},#{usertype},#{usersellername})
+	</insert>
+
+	<update id="updateUser">
+		UPDATE users
+		SET user_name = #{username},user_tel =#{usertel},user_adr =#{useradr},user_type =#{usertype},
+		user_sellername =#{usersellername},user_send_pay = #{usersendpay},user_distribution_pay = #{userdistributionpay},user_avatar = #{useravatar}
+		WHERE user_name = #{username}
+	</update>
+
+	<update id="updateUserPwd">
+		UPDATE users
+		SET user_name = #{username},user_pwd = #{userpwd}
+		WHERE user_name = #{username}
+	</update>
+
+	<update id="updateUserTel">
+		UPDATE users
+		SET user_name = #{username},user_tel =#{usertel}
+		WHERE user_name = #{username}
+	</update>
+
+	<update id="updateUserAdr">
+		UPDATE users
+		SET user_name = #{username},user_adr =#{useradr},user_tel =#{usertel}
+		WHERE user_name = #{username}
+	</update>
+
+
+</mapper>

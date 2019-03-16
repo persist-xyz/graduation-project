@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.soecode.lyf.dao.MenuDetailDao">
+	<!-- 目的：为dao接口方法提供sql语句配置 -->
+	<select id="queryMenuDetailAll" resultType="MenuDetail">
+		SELECT
+		md_id,
+		ms_id,
+		md_name,
+		md_img,
+		md_nowprice,
+		md_preprice,
+		md_describe,
+		md_monthsale,
+		md_praise
+		FROM
+		menu_detail
+	</select>
+
+	<select id="queryMdByMsId" resultType="MenuDetail" parameterType="long">
+		<!-- 具体的sql -->
+		SELECT
+		md_id,
+		md_name,
+		md_img,
+		md_nowprice,
+		md_preprice,
+		md_describe,
+		md_monthsale,
+		md_praise
+		FROM
+		menu_detail
+		WHERE
+		ms_id = #{msId}
+	</select>
+
+
+	<insert id="addMenuDetail">
+		INSERT INTO menu_detail (ms_id,md_name,md_img,md_nowprice,md_preprice,md_describe,md_monthsale,md_praise)
+		VALUES (#{msId},#{mdName},#{mdImg},#{mdNowprice},#{mdPreprice},#{mdDescribe},#{mdMonthsale},#{mdPraise})
+	</insert>
+
+	<update id="updateMenuDetail">
+		UPDATE menu_detail
+		SET ms_id = #{msId},md_name = #{mdName},md_img =#{mdImg},md_nowprice =#{mdNowprice},md_preprice =#{mdPreprice},
+		md_describe =#{mdDescribe},md_monthsale =#{mdMonthsale},md_praise =#{mdPraise}
+		WHERE md_name = #{mdName} AND ms_id = #{msId}
+	</update>
+
+<!-- =========================================================== -->
+
+	<!-- 3、获取某班级以及班级里面所有学生的信息 -->
+    <select id="queryMenuSortDetail" parameterType="int" resultMap="menuDetailAll">
+        <!-- select * 
+        from Class c left join ClassStudent cs
+                on c.class_id = cs.class_id
+            left join Student s
+                on cs.student_id = s.s_id
+        where c.class_id = #{id} -->
+        select * 
+        from menu_sort  s left join menu_detail d 
+        	on s.ms_id = d.ms_id
+        where s.user_id = 3
+    </select>
+
+    <resultMap type="com.soecode.lyf.entity.MenuSortDetail" id="menuDetailAll">
+        <id property="msId" column="ms_id"/>
+        <result property="msName" column="ms_name"/>
+        
+        <!-- property表示集合类型属性名称，ofType表示集合中的对象是什么类型 -->
+        <collection property="menuDetail" ofType="com.soecode.lyf.entity.MenuDetail">
+            <id property="mdId" column="md_id"/>
+        	<result property="mdImg" column="md_img"/>
+        	<result property="mdName" column="md_name"/>
+        </collection>
+    </resultMap>
+
+</mapper>

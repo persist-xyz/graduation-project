@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.soecode.lyf.dao.MenuSortDetailDao">
+	<!-- 目的：为dao接口方法提供sql语句配置 -->
+
+    <select id="queryMenuSortDetail" parameterType="long" resultMap="menuDetailAll">
+        select * 
+        from menu_sort  s INNER join menu_detail d
+        	on s.ms_id = d.ms_id
+        where s.seller_id = #{userid}
+    </select>
+
+    <resultMap type="com.soecode.lyf.entity.MenuSortDetail" id="menuDetailAll">
+        <id property="msId" column="ms_id"/>
+        <result property="msName" column="ms_name"/>
+        
+        <!-- property表示集合类型属性名称，ofType表示集合中的对象是什么类型 -->
+        <collection property="menuDetail" ofType="com.soecode.lyf.entity.MenuDetail">
+            <id property="mdId" column="md_id"/>
+        	<result property="mdImg" column="md_img"/>
+        	<result property="mdName" column="md_name"/>
+        	<result property="mdMonthsale" column="md_monthsale"/>
+        	<result property="mdNowprice" column="md_nowprice"/>
+        	<result property="mdPreprice" column="md_preprice"/>
+        	<result property="mdPraise" column="md_praise"/>
+        	<result property="mdDecribe" column="md_describe"/>
+        </collection>
+    </resultMap>
+
+</mapper>

@@ -1,0 +1,5 @@
+0:0:0:0:0:0:0:1 - - [22/Apr/2017:20:05:53 +0800] "GET /ssm/menusortdetail/queryMenuSortDetail HTTP/1.1" 500 5043 http-bio-82-exec-1 3640
+0:0:0:0:0:0:0:1 - - [22/Apr/2017:20:05:53 +0800] "GET /favicon.ico HTTP/1.1" 404 - http-bio-82-exec-2 0
+0:0:0:0:0:0:0:1 - - [22/Apr/2017:20:06:15 +0800] "GET /ssm/menusortdetail/queryMenuSortDetail?userid=3 HTTP/1.1" 200 12 http-bio-82-exec-5 1166
+0:0:0:0:0:0:0:1 - - [22/Apr/2017:20:06:29 +0800] "GET /ssm/menusortdetail/queryMenuSortDetail?userid=1 HTTP/1.1" 200 12 http-bio-82-exec-8 18
+0:0:0:0:0:0:0:1 - - [22/Apr/2017:20:06:34 +0800] "GET /ssm/menusortdetail/queryMenuSortDetail?userid=2 HTTP/1.1" 200 1011 http-bio-82-exec-8 77

@@ -1,0 +1,5 @@
+127.0.0.1 - - [21/Mar/2017:10:10:03 +0800] "GET /bag HTTP/1.0" 404 - http-bio-81-exec-8 0
+127.0.0.1 - - [21/Mar/2017:10:10:09 +0800] "GET /bag HTTP/1.0" 404 - http-bio-81-exec-9 0
+127.0.0.1 - - [21/Mar/2017:10:10:09 +0800] "GET /bag?gr=CN HTTP/1.0" 404 - http-bio-81-exec-1 0
+127.0.0.1 - - [21/Mar/2017:10:10:09 +0800] "GET /WebObjects/VCInit.woa/wa/getBag?ix=4 HTTP/1.0" 404 - http-bio-81-exec-2 0
+127.0.0.1 - - [21/Mar/2017:10:10:09 +0800] "GET /WebObjects/VCInit.woa/wa/getBag?ix=4 HTTP/1.0" 404 - http-bio-81-exec-10 0

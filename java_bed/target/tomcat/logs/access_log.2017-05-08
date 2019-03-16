@@ -1,0 +1,2 @@
+0:0:0:0:0:0:0:1 - - [08/May/2017:19:32:40 +0800] "GET /ssm/menusortdetail/queryMenuSortDetail?userid=2 HTTP/1.1" 405 1045 http-bio-82-exec-1 10728
+0:0:0:0:0:0:0:1 - - [08/May/2017:19:32:42 +0800] "GET /favicon.ico HTTP/1.1" 404 - http-bio-82-exec-3 0
