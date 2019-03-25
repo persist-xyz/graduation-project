@@ -1,3 +1,5 @@
+
+
 ### 技术栈
 
 前端：vue +  Vonic 
@@ -5,6 +7,7 @@
 后端： Java + Mybatis + MySQL 
 
 代理：nginx
+
 
 
 ### 本地开发环境配置
@@ -46,35 +49,34 @@
 
 #### C端：
 
-![](https://assets.mgzf.com/appimg/1050be829b6831aa161d01153f61ed95.png)
+<img src="https://assets.mgzf.com/appimg/1050be829b6831aa161d01153f61ed95.png" style="zoom:50%" />
 
-![首页](https://assets.mgzf.com/appimg/50851fbf76a14be57d2fed1a973e455d.png)
+<img src="https://assets.mgzf.com/appimg/50851fbf76a14be57d2fed1a973e455d.png" style="zoom:50%" />
 
-![](https://assets.mgzf.com/appimg/52b9ad59e3befbca3fc43bb816566194.png)
+<img src="https://assets.mgzf.com/appimg/52b9ad59e3befbca3fc43bb816566194.png" style="zoom:50%" />
 
-![](https://assets.mgzf.com/appimg/77ed351bc9de28b03e8e2b3498b48304.png)
+<img src="https://assets.mgzf.com/appimg/77ed351bc9de28b03e8e2b3498b48304.png" style="zoom:50%" />
 
-![](https://assets.mgzf.com/appimg/c2bafa7192a2cd1627541b6c45205c95.png)
+<img src="https://assets.mgzf.com/appimg/c2bafa7192a2cd1627541b6c45205c95.png" style="zoom:50%" />
 
-![](https://assets.mgzf.com/appimg/a3b21b72ba35c0a0c1b16f614c5b59ec.png)
+<img src="https://assets.mgzf.com/appimg/a3b21b72ba35c0a0c1b16f614c5b59ec.png" style="zoom:50%" />
 
-![](https://assets.mgzf.com/appimg/5ec4bb5e1513166fe3087cc11384c4ce.png)
+<img src="https://assets.mgzf.com/appimg/5ec4bb5e1513166fe3087cc11384c4ce.png" style="zoom:50%" />
 
-![](https://assets.mgzf.com/appimg/d26aeac5165ca8cb765c08763bb930df.png)
+<img src="https://assets.mgzf.com/appimg/d26aeac5165ca8cb765c08763bb930df.png" style="zoom:50%" />
 
-![](https://assets.mgzf.com/appimg/9d0e5dd856021b86630fbb408f119f95.png)
-
+<img src="https://assets.mgzf.com/appimg/9d0e5dd856021b86630fbb408f119f95.png" style="zoom:50%" />
 
 
 #### B端：
 
-![](https://assets.mgzf.com/appimg/7c811a632e1b89c06838aa708430a67b.png)
+<img src="https://assets.mgzf.com/appimg/7c811a632e1b89c06838aa708430a67b.png" style="zoom:50%" />
 
-![](https://assets.mgzf.com/appimg/8b778ca221bedafcc1736f81da2ddcd2.png)
+<img src="https://assets.mgzf.com/appimg/8b778ca221bedafcc1736f81da2ddcd2.png" style="zoom:50%" />
 
-![](https://assets.mgzf.com/appimg/0cc0b04bea49b93c86d9ba3765885d51.png)
+<img src="https://assets.mgzf.com/appimg/0cc0b04bea49b93c86d9ba3765885d51.png" style="zoom:50%" />
 
-![](https://assets.mgzf.com/appimg/1324e4a01d49cc15d9a7ead59ab0eebb.png)
+
 
 
 
