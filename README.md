@@ -49,34 +49,40 @@
 
 #### C端页面：
 
-<img src="https://assets.mgzf.com/appimg/1050be829b6831aa161d01153f61ed95.png" width="375" />
+<img src="./screenshot/01.png" width="375" />
 
-<img src="https://assets.mgzf.com/appimg/50851fbf76a14be57d2fed1a973e455d.png" width="375" />
+<img src="./screenshot/1.png" width="375" />
 
-<img src="https://assets.mgzf.com/appimg/52b9ad59e3befbca3fc43bb816566194.png" width="375" />
+<img src="./screenshot/2.png" width="375" />
 
-<img src="https://assets.mgzf.com/appimg/5fa7fcda6d4fb8ef75eaf0ce9dc29f22.png" width="375" />
+<img src="./screenshot/3.png" width="375" />
 
-<img src="https://assets.mgzf.com/appimg/c2bafa7192a2cd1627541b6c45205c95.png" width="375" />
+<img src="./screenshot/4.png" width="375" />
 
-<img src="https://assets.mgzf.com/appimg/a3b21b72ba35c0a0c1b16f614c5b59ec.png" width="375" />
+<img src="./screenshot/5.png" width="375" />
 
-<img src="https://assets.mgzf.com/appimg/5ec4bb5e1513166fe3087cc11384c4ce.png" width="375" />
+<img src="./screenshot/7.png" width="375" />
 
-<img src="https://assets.mgzf.com/appimg/d26aeac5165ca8cb765c08763bb930df.png" width="375" />
+<img src="./screenshot/8.png" width="375" />
 
-<img src="https://assets.mgzf.com/appimg/9d0e5dd856021b86630fbb408f119f95.png" width="375" />
+<img src="./screenshot/9.png" width="375" />
+
+<img src="./screenshot/10.png" width="375" />
+
+<img src="./screenshot/11.png" width="375" />
+
+<img src="./screenshot/12.png" width="375" />
 
 
 #### B端页面：
 
-<img src="https://assets.mgzf.com/appimg/7c811a632e1b89c06838aa708430a67b.png" width="375" />
+<img src="./screenshot/02.png" width="375" />
 
-<img src="https://assets.mgzf.com/appimg/8b778ca221bedafcc1736f81da2ddcd2.png" width="375" />
+<img src="./screenshot/03.png" width="375" />
 
-<img src="https://assets.mgzf.com/appimg/0cc0b04bea49b93c86d9ba3765885d51.png" width="375" />
+<img src="./screenshot/04.png" width="375" />
 
-
+<img src="./screenshot/05.png" width="375" />
 
 
 
