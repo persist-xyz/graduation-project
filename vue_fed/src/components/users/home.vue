@@ -19,7 +19,11 @@
             </div>
 
             <div class="index__menu">
-                <div class="index__location"><span><i class="demo-icon icon-location index__location--icon"></i></span><a class="index__location--name">江宁路凯迪克大厦</a></div>
+                <div class="index__location">
+                    <span><i class="demo-icon icon-location index__location--icon"></i></span>
+                    <div id="allmap"></div>
+                    <a class="index__location--name">江宁路凯迪克大厦</a>
+                </div>
 
                 <ul class="index__menu--ul">
                     <li>
@@ -83,12 +87,12 @@
             <!-- 商家列表 -->
 
             <div class="seller_list">
-                <item @click.native="$router.forward('FoodDetail')" v-for="item in sellerAllInfo">
+                <item @click.native="toFoodDetail" v-for="item in sellerAllInfo" :data-sellerId="item.userId" :data-sellerusername="item.userSellerName" :data-sellerimg="item.userAvatar">
                     <div class="left seller_list_divimg">
-                        <img src="src/static/images/seller1.jpg" alt="商家图片">
+                        <img :src='item.userAvatar' alt="商家图片">
                     </div>
                     <div class="seller_list_info">
-                        <p class="seller-title">{{item.userSellerName}}<span class="right">88km</span></p>
+                        <p class="seller-title">{{item.userSellerName}}<span class="right"></span></p>
                         <div class="month-sell">
                             月售
                             <span class="">{{item.userMonthSale}}</span>
@@ -111,12 +115,13 @@ import Swiper from 'swiper'
 export default {
         data() {
             return {
-                sellerAllInfo:[],
-                userid:localStorage.getItem('userid')
+                sellerAllInfo:[]
             }
         },
         created() {
             this.getUserAll();
+            // 获取地址
+            //this.initCurrentLocation();
         },
         methods: {
             back() {
@@ -126,16 +131,78 @@ export default {
             },
             getUserAll() {
                 let _this = this;
-                let obj = {
-                    userid:this.userid,
-                    usertype:1
-                };
-                $.get('/ssm/user/queryUserAll',obj).then(function(sellerAllInfo) {
+                $.post('/ssm/user/queryUserAll').then(function(sellerAllInfo) {
                     _this.sellerAllInfo = sellerAllInfo;
-                    console.log(sellerAllInfo);
+                    console.log(sellerAllInfo,'=======sellerAllInfo=======');
                 });
-            }
+            },
+            toFoodDetail(){
+                //得到当前选中的商家id
+                let sellerId = $(event.currentTarget).data('sellerid');
+                let sellerUserName = $(event.currentTarget).data('sellerusername');
+                let userAvatar = $(event.currentTarget).data('sellerimg');
+                console.log(sellerId,sellerUserName,userAvatar,'--------------sellerid-------');
+                $router.push({
+                    path:'foodDetail',
+                    query:{
+                        sellerId:sellerId,
+                        sellerUserName:sellerUserName,
+                        userAvatar:userAvatar
+                    }
+                });
+            },
+            // 获取当前位置
+            initCurrentLocation(){
+                // 百度地图API功能
+                let map = new BMap.Map("allmap");
+                let point = new BMap.Point(121.462601,31.237669);
+                map.centerAndZoom(point,12);
+                //红色
+                var icon2 = new BMap.Icon('src/static/images/ding2.png', new BMap.Size(40, 40), {
+                    anchor: new BMap.Size(20, 40)
+                });
 
+                map.setMapStyle({
+                    style: 'googlelite'
+                }); //精简风格
+                map.enableScrollWheelZoom(); //启用滚轮放大缩小，默认禁用
+                map.enableContinuousZoom(); //启用地图惯性拖拽，默认禁用
+                let geolocation = new BMap.Geolocation();
+
+                // 获取经纬度
+                geolocation.getCurrentPosition(function(r) {
+                    if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+                        let mk = new BMap.Marker(r.point);
+                        map.addOverlay(mk);
+                        map.panTo(r.point);
+                        let xx = r.point.lng, yy = r.point.lat;
+                        map.centerAndZoom(r.point, 15);
+                        let markergps = new BMap.Marker(r.point, {
+                            icon: icon2
+                        });
+                        map.addOverlay(markergps); //添加GPS标注
+                        console.log('您的位置：'+r.point.lng+','+r.point.lat);
+
+                        // 获取地名
+                        let gc = new BMap.Geocoder();
+                        let point = new BMap.Point(r.point.lng,r.point.lat);
+                        gc.getLocation(point, function(rs) {
+                            alert(rs.sematic_description);
+                            let addComp = rs.addressComponents;
+                            let mapAddress = addComp.province+addComp.city + addComp.district
+                                + addComp.street + addComp.streetNumber;
+                            console.log(mapAddress,'----------------');
+                            // 渲染页面地名
+                            $('.index__location--name').text(mapAddress);
+                        });
+                    } else {
+                        toast('定位失败' + this.getStatus());
+                    }
+                }, {
+                    enableHighAccuracy: true
+                });
+
+            }
         },
         components: {},
         mounted() {

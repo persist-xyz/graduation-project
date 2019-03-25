@@ -1,0 +1,15 @@
+response=[{a:1,b:1,c:1},{a:2,b:2,c:2},{a:2,b:2,c:2}]
+
+data={};
+response.forEach((v,k)=>{
+	data[v.b]?data[v.b].push(v):data[v.b]=[v];
+});
+
+
+ select o.order_single_number,o.order_number,m.md_name,m.md_preprice from order_detail o inner join menu_detail m on o.md_id=m.md_id where o.user_id=23;
+
+total=[
+	{num:2,price:10},
+	{num:4,price:40},
+	{num:5,price:50}
+]

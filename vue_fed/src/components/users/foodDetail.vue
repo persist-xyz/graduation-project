@@ -2,14 +2,14 @@
     <div class="page has-navbar has-tabbar" v-nav="{title: '菜更香', showBackButton: true}">
         <div class="page-content" style="padding-top: 45px;height:100%;">
             <div class="detail__top">
-                <div class="detail__top--con">
+                <div class="detail__top--con" >
                     <div class="detail__top--left">
                         <div class="detail__top--logo"><img src="/src/static/images/restaurant.jpg"></div>
                     </div>
                     <div class="detail__top--right">
-                        <div class="detail__top--title">菜更香</div>
+                        <div class="detail__top--title">{{sellerInfo.userSellerName}}</div>
                         <div class="detail__top--remark">月销量：103笔</div>
-                        <div class="detail__top--remark"><span><i class="demo-icon icon-location"></i>1.6km</span><span>￥19元起送</span></div>
+                        <div class="detail__top--remark"><span><i class="demo-icon icon-location"></i>1.6km</span><span>￥{{sellerInfo.userSendPay}}元起送</span></div>
                     </div>
                 </div>
             </div>
@@ -21,26 +21,32 @@
                     <!--列表了-->
                     <div class="detail__menu--title menu-wrapper" ref="menuWrapper">
                         <ul>
-                            <li v-for="(item,index) in menuSortData" @click="menuClick(index,$event)" :class="index==menuCurrentIndex?'menu-item-selected':'menu-item'"> {{item.msName}}</li>
+                            <li v-for="(item,index) in sortDetailData" @click="menuClick(index,$event)" :data-msId="item.msId"
+                                :class="index==menuCurrentIndex?'menu-item-selected':'menu-item'"> {{item.msName}}</li>
                         </ul>
                     </div>
                     <div class="detail__menu--con" id="wrapper" ref="foodsWrapper">
                         <ul>
-                            <li v-for="(item,indexClass) in goods" class="food-list food-list-hook">
-                                <h1>{{item.name}}</h1>
+                            <li v-for="(item,indexClass) in sortDetailData" class="food-list food-list-hook">
+                                <h1 style="margin-bottom: 0px;">{{item.msName}}</h1>
                                 <ul>
-                                    <li v-for="(food,index) in item.foods"   @click="menuChoose(indexClass,index,food)" :class="selectedFood.indexOf(indexClass+''+index) > -1?'food-item choose':'food-item'" :data-name="food.name" :data-price="food.price">
-
-                                        <div class="icon"><img width="57" height="57" :src="food.icon" /></div>
+                                    <li v-for="(food,index) in item.menuDetail"  @click="menuChoose(indexClass,index,food)"
+                                        :class="selectedFood.indexOf(indexClass+''+index) > -1?'food-item choose':'food-item'"
+                                        :data-name="food.mdName" :data-price="food.mdNowprice" :data-mdid="food.mdId">
+                                        <div class="icon"><img width="57" height="57" :src="food.mdImg" /></div>
                                         <div class="content">
-                                            <h2>{{food.name}}</h2>
+                                            <h2>{{food.mdName}}</h2>
                                             <div class="sell-info">
-                                                <span class="sellCount">月售{{food.sellCount}}份</span>
-                                                <span class="rating">好评率{{food.rating}}%</span>
+
+                                                <span class="sellCount" v-show="food.mdMonthsale!=null">月售{{food.mdMonthsale}}份</span>
+                                                <span class="sellCount" v-show="food.mdMonthsale==null">月售0份</span>
+
+                                                <span class="rating" v-show="food.mdPraise!=null">好评率{{food.mdPraise}}%</span>
+                                                <span class="rating" v-show="food.mdPraise==null">好评率0%</span>
                                             </div>
                                             <div class="price">
-                                                <span class="newPrice"><span class="unit">￥</span>{{food.price}}</span>
-                                                <span v-show="food.oldPrice" class="oldPrice">￥{{food.oldPrice}}</span>
+                                                <span class="newPrice"><span class="unit">￥</span>{{food.mdNowprice}}</span>
+                                                <span v-show="food.oldPrice" class="oldPrice">￥{{food.mdPreprice}}</span>
                                             </div>
                                         </div>
                                     </li>
@@ -76,7 +82,7 @@
                             </span>
                         </div>
                     </div>
-                <div class="detail__footer--money">配送费￥4</div>
+                <div class="detail__footer--money">配送费￥{{sellerInfo.userDistributionPay}}</div>
                 <div class="detail__footer--btn" v-bind:class="{active:isActive}" @click="toOrder()">选好了</div>
             </div>
 
@@ -96,26 +102,37 @@ export default {
             ],
             tabIndex: 0,
             goods: [],
-            listHeight: [],
+            listHeight: [0],
             foodsScrollY: 0,
             isActive:false,
             selectedFood:[],
             cartList:[],
-            menuSortData:[],
-            menuDetailData:[]
+            sortDetailData:[],
+            sellerId:0,
+            sellerInfo:[]
         }
     },
     created() {
-        $.get('data.json').then((res) => {
+       /* $.get('data.json').then((res) => {
             this.goods = res.goods;
             console.log(res.goods,'=======res.goods===========');
             this.$nextTick(() => {
                 this._initScroll(); // 初始化scroll
                 this._calculateHeight(); // 初始化列表高度列表
             })
-        });
-        this.getMenuSort();
-//        this.getMenuDetail();
+        });*/
+
+        //取出上一个页面传过来的商家id
+        this.sellerId = this.$route.query.sellerId;
+        this.sellerUserName = this.$route.query.sellerUserName;
+        this.userAvatar = this.$route.query.userAvatar;
+        localStorage.setItem('sellerid',this.sellerId);
+        localStorage.setItem('sellerUserName',this.sellerUserName);
+        localStorage.setItem('userAvatar',this.userAvatar);
+        //获取商家基本信息
+        this.getSellerInfo();
+        //获取商家所有菜品信息
+        this.getMenuSortDetail();
     },
     props: {
         seller: Object
@@ -133,19 +150,29 @@ export default {
         }
     },
     methods: {
-        getMenuSort(){
+        getSellerInfo(){
             let _this = this;
-            $.get('/ssm/menusort/queryMenuSortAll').then(function (menuSortData) {
-                _this.menuSortData = menuSortData;
-                console.log(this.menuSortData,'=========menuSortData========');
+            $.post('/ssm/user/queryUserById',{userid:_this.sellerId}).then(function (sellerInfo) {
+                _this.sellerInfo = sellerInfo[0];
+                console.log(_this.sellerInfo,'=========sellerInfo========');
+
+                _this.$nextTick(() => {
+                    //_this._initScroll(); // 初始化scroll
+                   // _this._calculateHeight(); // 初始化列表高度列表
+                })
+
             });
         },
-        getMenuDetail(){
+        getMenuSortDetail(){
             let _this = this;
-            $.get('/ssm/menudetail/queryMdByMsId',{msId:''}).then(function (menuDetailData) {
-                _this.menuDetailData = menuDetailData;
+            $.post('/ssm/menusortdetail/queryMenuSortDetail',{userid:_this.sellerId}).then(function (sortDetailData) {
+                _this.sortDetailData = sortDetailData;
+                console.log(_this.sortDetailData,'=========sortDetailData========');
 
-                console.log(this.menuDetailData,'=========menuDetailData=========');
+                _this.$nextTick(() => {
+                    _this._initScroll(); // 初始化scroll
+                    _this._calculateHeight(); // 初始化列表高度列表
+                })
             });
         },
         onTabClick(index) {
@@ -168,7 +195,7 @@ export default {
         _calculateHeight() {
             let foodList = this.$refs.foodsWrapper.querySelectorAll('.food-list-hook');
             let height = 0;
-            this.listHeight.push(height);
+            //this.listHeight.push(height);
             for (let i = 0, l = foodList.length; i < l; i++) {
                 let item = foodList[i];
                 height += item.clientHeight;
@@ -179,7 +206,7 @@ export default {
             if (!event._constructed) {
                 return;
             }
-            this.foodsScroll.scrollTo(0, -this.listHeight[index], 300)
+            this.foodsScroll.scrollTo(0, -this.listHeight[index], 300);
         },
         menuChoose(indexClass,i, food){
             let s=indexClass+''+i;
@@ -187,6 +214,7 @@ export default {
             let chooseFood={
                 foodname:$(event.currentTarget).data('name'),
                 foodprice:$(event.currentTarget).data('price'),
+                foodmdid:$(event.currentTarget).data('mdid'),
                 foodnumber:1
             };
             if (index == -1) {
@@ -199,7 +227,7 @@ export default {
 
             this.selectedFood.sort();
             this.cartList.sort();
-            console.log(this.cartList);
+            console.log(this.cartList,'=================cartList===============');
             if(this.selectedFood.length>0){
                 this.isActive=true;
             }else{
@@ -210,6 +238,7 @@ export default {
             if(!this.isActive){
                 return ;
             }
+            localStorage.setItem('cartList',JSON.stringify(this.cartList));
             $router.push({path:'cart',query:{cartList:this.cartList}});
         }
     }
@@ -341,8 +370,8 @@ export default {
     display: flex;
     justify-content: flex-start;
     flex-wrap: nowrap;
-    margin:5px 0;
-    padding:5px 0;
+    padding:10px 10px;
+
 }
 .food-item.choose {
     background:#fcf8e8;

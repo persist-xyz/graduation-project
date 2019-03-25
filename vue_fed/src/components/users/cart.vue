@@ -1,14 +1,20 @@
 <template>
-    <div class="page has-navbar has-tabbar" v-nav="{title: '提交订单', showBackButton: true}">
+    <div class="page has-navbar has-tabbar" v-nav="{title: '我的购物车', showBackButton: true,onBackButtonClick}">
         <div class="page-content" style="padding-top: 45px;height:100%;">
             <div class="cart__content">
-                <div class="cart__address" @click="$router.forward('../edit/EditAddress')">
-                    <div>
-                        <p>凯迪克大厦 16层蘑菇公寓</p>
-                        <p>云老师 1856345345</p>
+                <div class="cart__address" @click="showActionAddr">
+
+                    <div v-show="!chooseAddrInfo.name" style="padding: 6px 0 13px;">
+                        点击选择收货地址~
+                    </div>
+
+                    <div v-show="chooseAddrInfo.name">
+                        <p>{{chooseAddrInfo.addr}}</p>
+                        <p>{{chooseAddrInfo.name}}   {{chooseAddrInfo.tel}}</p>
                     </div>
                     <div class="cart__address--icon"><span class="icon ion-ios-arrow-right"></span></div>
                 </div>
+
                 <item>
                     支付方式
                     <span class="item-note dark">在线支付</span>
@@ -29,7 +35,7 @@
                     </item>
                     <ul>
                         <li class="cart__item" v-for="(item,index) in cartList">
-                            <div class="cart__item--name">{{item.foodname}}</div>
+                            <div class="cart__item--name" :data-mdid="item.foodmdid">{{item.foodname}}</div>
                             <div class="cart__item--price">￥<span>{{item.foodprice}}</span>
                             </div>
                             <div class="cart__item--number">
@@ -70,7 +76,7 @@
             <!--底部购物车-->
             <div class="cart__footer">
                 <div class="cart__money">￥{{totalMoney}}</div>
-                <div class="cart__submit" @click="submitOrder()">支付订单</div>
+                <div class="cart__submit" @click="submitOrder()">提交订单</div>
             </div>
         </div>
     </div>
@@ -78,20 +84,49 @@
 
 <script>
     import $ from 'jquery';
+    import chooseAddrModal from './chooseAddrModal'
     export default {
         data() {
             return {
+                chooseAddrInfo:{},
                 personNumber: '以便商家给您带够餐具',
-                cartList: this.$route.query.cartList,
-
+                cartList: [],
+                userid : localStorage.getItem('userid')
             }
         },
         created() {
-            console.log(this.$route.query.cartList);
-
+            this.cartList = this.$route.query.cartList ? this.$route.query.cartList : JSON.stringify(localStorage.cartList);
+            console.log(this.cartList,'.................cartList');
         },
         methods: {
-
+            onBackButtonClick(){
+                $app.$router.back('./home');
+            },
+            /*选择收货地址面板*/
+            showActionAddr(){
+                $modal.fromComponent(chooseAddrModal, {
+                    title: '选择收货地址',
+                    theme: 'default',
+                    onHide: () => {
+                        console.log('modal hide');
+                    }
+                }).then((modal) => {
+                    this.addrModal = modal;
+                    var _this = this;
+                    modal.content.$on('closeAddrModal',function (chooseAddrInfo) {
+                        //确定地址之后 回到订单页，显示地址
+                        modal.hide();
+                        _this.showMyAddr(chooseAddrInfo);
+                    });
+                    modal.show();
+                    modal.content.getAddressAll();
+                })
+            },
+            //选中的地址信息
+            showMyAddr(chooseAddrInfo){
+                this.chooseAddrInfo = chooseAddrInfo;
+                console.log(this.chooseAddrInfo,'========chooseAddrInfo========');
+            },
             //下拉选择人数
             showActionSheet(theme) {
                 $actionSheet.show({
@@ -100,23 +135,18 @@
                     buttons: {
                         '1人': () => {
                             this.personNumber = '1人';
-                            console.log('action 1 called.')
                         },
                         '2人': () => {
                             this.personNumber = '2人';
-                            console.log('action 2 called.')
                         },
                         '3人': () => {
                             this.personNumber = '3人';
-                            console.log('action 3 called.')
                         },
                         '4人': () => {
                             this.personNumber = '4人';
-                            console.log('action 4 called.')
                         },
                         '最多5人': () => {
                             this.personNumber = '5人';
-                            console.log('action 5 called.')
                         }
                     }
                 })
@@ -128,13 +158,9 @@
                 } else {
                     this.cartList[index].foodnumber = 1;
                     $dialog.confirm({
-                        // 设置为ios样式
                         theme: 'ios',
-                        // 标题
                         title: '您确定要移除这个菜吗？',
-                        // 取消按钮文本
                         cancelText: '取消',
-                        // 确定按钮文本
                         okText: '确定'
                     }).then((res) => {
                         this.cartList.splice(index, 1);
@@ -148,12 +174,41 @@
                 this.cartList[index].foodnumber += 1;
                 console.log('addNumber');
             },
-            //提交
+
+            //提交订单 向服务器推送消息
             submitOrder(){
-                $toast.show('支付成功', 3000).then(() => {
-                    console.log('toast hide');
-                    $router.push({path:'orderDetail',query:{cartList:this.cartList,totalnum:this.total,totalmoney:this.totalMoney,personNumber:this.personNumber}});
-                })
+
+                sendMsg(localStorage.userid,localStorage.sellerid,'您有一个新的外卖订单，请尽快处理');
+
+                let _this = this;
+                var params={
+                    userid:localStorage.userid,
+                    username:localStorage.username,
+                    sellerid:localStorage.sellerid,
+                    usersellername:localStorage.sellerUserName,
+                    useravatar:localStorage.userAvatar,
+                    mdids:[]
+                }
+                this.cartList.forEach(function(item) {
+                    console.log(item,'---------item');
+                    params.mdids.push(item.foodmdid+'-'+item.foodnumber);
+                });
+                params.mdids = params.mdids.join('_');
+//                console.log(params.mdids,'=========params.mdids');
+                $.post('/ssm/order/addOrder',params).then(function (data) {
+                    $toast.show('提交订单成功', 500).then(() => {
+                        $router.push({
+                            path:'orderInfo',
+                            query:{
+                                cartList:_this.cartList,
+                                totalnum:_this.total,
+                                totalmoney:_this.totalMoney,
+                                personNumber:_this.personNumber
+                            }
+                        });
+                    })
+                });
+
             }
         },
         computed: {
@@ -172,7 +227,11 @@
                 });
                 return money + 4;
             }
-
+        },
+        destroyed() {
+            if (this.addrModal)
+                $modal.destroy(this.addrModal);
+            window.MultiModal = undefined;
         }
     }
 </script>

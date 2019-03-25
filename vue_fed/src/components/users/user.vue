@@ -47,11 +47,10 @@ export default {
     methods:{
         getUserInfo(){
             let _this = this;
-            $.get('/ssm/user/queryByName',{username:this.username,userpwd:this.userpwd,usertype:this.usertype}).then( function (data) {
+            $.post('/ssm/user/queryByName',{username:this.username,userpwd:this.userpwd,usertype:this.usertype}).then( function (data) {
                 console.log(data,'data111111111');
                 console.log(data.userTel,'0000000');
                 localStorage.setItem('usertel',data.userTel);
-                localStorage.setItem('userid',data.userId);
                 _this.userinfo = data;
                 if(data != 0){
                     _this.userInfo = false;

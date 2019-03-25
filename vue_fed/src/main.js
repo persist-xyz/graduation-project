@@ -16,9 +16,10 @@ import tabBar from './components/users/TabBar'
 import TabbarHome from './components/users/home'
 import TabbarOrders from './components/users/orders'
 import TabbarUser from './components/users/user'
-import PageFromTabbar from './components/users/PageFromTabbar'
+import chooseAddrModal from './components/users/chooseAddrModal'
 
 import orderDetail from './components/users/orderDetail'
+import orderInfo from './components/users/orderInfo'
 
 //foodDetail
 import foodDetail from './components/users/foodDetail'
@@ -42,9 +43,10 @@ const routes = [
     { path: '/addMenuSort', component: addMenuSort },
     { path: '/addMenuDetailModel', component: addMenuDetailModel },
     { path: '/addMyMenuDetailModal', component: addMyMenuDetailModal },
-    { path: '/PageFromTabbar', component: PageFromTabbar },
+    { path: '/chooseAddrModal', component: chooseAddrModal },
 
     { path: '/users/orderDetail', component: orderDetail },
+    { path: '/users/orderInfo', component: orderInfo },
     { path: '/users/foodDetail', component: foodDetail },
     { path: '/users/cart', component: cart },
     {

@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="takeout@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.4">
+    <root id="1"/>
+    <schema id="2" parent="1" name="takeout">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="biu"/>
+    <schema id="4" parent="1" name="hufangtong"/>
+    <schema id="5" parent="1" name="information_schema"/>
+    <schema id="6" parent="1" name="litemall"/>
+    <schema id="7" parent="1" name="mysql"/>
+    <schema id="8" parent="1" name="nideshop"/>
+    <schema id="9" parent="1" name="performance_schema"/>
+    <schema id="10" parent="1" name="starter-mysql"/>
+    <schema id="11" parent="1" name="sys"/>
+    <schema id="12" parent="1" name="thinkjsplus"/>
+    <table id="13" parent="2" name="assess"/>
+    <table id="14" parent="2" name="menu_detail"/>
+    <table id="15" parent="2" name="menu_sort"/>
+    <table id="16" parent="2" name="order_detail"/>
+    <table id="17" parent="2" name="receiver_address"/>
+    <table id="18" parent="2" name="users"/>
+    <column id="19" parent="13" name="as_id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="20" parent="13" name="user_id">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="21" parent="13" name="as_time">
+      <Position>3</Position>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="22" parent="13" name="as_content">
+      <Position>4</Position>
+      <Comment>ç”¨æˆ·è¯„ä»·è¡¨</Comment>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <key id="23" parent="13" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>as_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="24" parent="14" name="md_id">
+      <Position>1</Position>
+      <Comment>è&#x8f;œå&#x8d;•ç±»åˆ«ä¸‹çš„å&#x8d;•å“&#x81;ä¸»é”®</Comment>
+      <DataType>int(100)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="25" parent="14" name="ms_id">
+      <Position>2</Position>
+      <Comment>è&#x8f;œå&#x8d;•ç±»åˆ«ID</Comment>
+      <DataType>int(100)|0</DataType>
+    </column>
+    <column id="26" parent="14" name="md_name">
+      <Position>3</Position>
+      <Comment>å&#x8d;•å“&#x81;å&#x90;&#x8d;å­—</Comment>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="27" parent="14" name="md_img">
+      <Position>4</Position>
+      <Comment>å&#x8d;•å“&#x81;å›¾ç‰‡</Comment>
+      <DataType>longtext|0</DataType>
+    </column>
+    <column id="28" parent="14" name="md_nowprice">
+      <Position>5</Position>
+      <Comment>å&#x8d;•å“&#x81;çŽ°åœ¨çš„ä»·æ ¼</Comment>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="29" parent="14" name="md_preprice">
+      <Position>6</Position>
+      <Comment>å&#x8d;•å“&#x81;ä»¥å‰&#x8d;çš„ä»·æ ¼</Comment>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="30" parent="14" name="md_describe">
+      <Position>7</Position>
+      <Comment>å&#x8d;•å“&#x81;æ&#x8f;&#x8f;è¿°</Comment>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="31" parent="14" name="md_monthsale">
+      <Position>8</Position>
+      <Comment>æœˆå”®</Comment>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="32" parent="14" name="md_praise">
+      <Position>9</Position>
+      <Comment>å&#x8d;•å“&#x81;å¥½è¯„çŽ‡</Comment>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <key id="33" parent="14" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>md_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="34" parent="15" name="ms_id">
+      <Position>1</Position>
+      <Comment>è&#x8f;œå&#x8d;•ç±»åˆ«ä¸»é”®</Comment>
+      <DataType>int(100)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="35" parent="15" name="seller_id">
+      <Position>2</Position>
+      <Comment>å•†å®¶ID</Comment>
+      <DataType>int(100)|0</DataType>
+    </column>
+    <column id="36" parent="15" name="ms_name">
+      <Position>3</Position>
+      <Comment>è&#x8f;œå&#x8d;•ç±»åˆ«å&#x90;&#x8d;å­—</Comment>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="37" parent="15" name="ms_sort">
+      <Position>4</Position>
+      <Comment>è&#x8f;œå&#x8d;•ç±»åˆ«æŽ’åº&#x8f;æ ‡å¿—</Comment>
+      <DataType>int(100)|0</DataType>
+    </column>
+    <index id="38" parent="15" name="b_id">
+      <ColNames>seller_id</ColNames>
+    </index>
+    <key id="39" parent="15" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ms_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="40" parent="16" name="order_id">
+      <Position>1</Position>
+      <Comment>è®¢å&#x8d;•ä¸»é”®</Comment>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="41" parent="16" name="user_id">
+      <Position>2</Position>
+      <Comment>è®¢å&#x8d;•-&gt;ç”¨æˆ·</Comment>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="42" parent="16" name="seller_id">
+      <Position>3</Position>
+      <Comment>å•†å®¶-&gt;è®¢å&#x8d;•</Comment>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="43" parent="16" name="md_id">
+      <Position>4</Position>
+      <Comment>è®¢å&#x8d;•å&#x8d;•å“&#x81;id</Comment>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="44" parent="16" name="order_status">
+      <Position>5</Position>
+      <Comment>è®¢å&#x8d;•çŠ¶æ€&#x81;&#xd;
+1:å¾…å¤„ç&#x90;†&#xd;
+2:é…&#x8d;é€&#x81;ä¸­&#xd;
+3:å®Œæˆ&#x90;</Comment>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="45" parent="16" name="order_create_time">
+      <Position>6</Position>
+      <Comment>è®¢å&#x8d;•åˆ›å»ºæ—¶é—´</Comment>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="46" parent="16" name="order_number">
+      <Position>7</Position>
+      <Comment>è®¢å&#x8d;•ç¼–å&#x8f;·</Comment>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="47" parent="16" name="order_total_price">
+      <Position>8</Position>
+      <Comment>è®¢å&#x8d;•æ€»ä»·</Comment>
+      <DataType>decimal(10,2)|0</DataType>
+    </column>
+    <column id="48" parent="16" name="order_single_number">
+      <Position>9</Position>
+      <Comment>è®¢å&#x8d;•å&#x8d;•å“&#x81;æ•°é‡&#x8f;</Comment>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="49" parent="16" name="userSellername">
+      <Position>10</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="50" parent="16" name="userAvatar">
+      <Position>11</Position>
+      <DataType>longtext|0</DataType>
+    </column>
+    <column id="51" parent="16" name="user_name">
+      <Position>12</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <index id="52" parent="16" name="u_id">
+      <ColNames>user_id</ColNames>
+    </index>
+    <key id="53" parent="16" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>order_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="54" parent="17" name="receiver_address_id">
+      <Position>1</Position>
+      <DataType>int(100)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="55" parent="17" name="user_id">
+      <Position>2</Position>
+      <DataType>int(100)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="56" parent="17" name="receiver_address_username">
+      <Position>3</Position>
+      <DataType>varchar(225)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="57" parent="17" name="receiver_address_usertel">
+      <Position>4</Position>
+      <DataType>varchar(225)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="58" parent="17" name="receiver_address_useradr">
+      <Position>5</Position>
+      <Comment>ç”¨æˆ·çš„æ”¶è´§åœ°å&#x9d;€è¡¨</Comment>
+      <DataType>varchar(225)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="59" parent="17" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>receiver_address_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="60" parent="18" name="user_id">
+      <Position>1</Position>
+      <Comment>ç”¨æˆ·è¡¨</Comment>
+      <DataType>int(255)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="61" parent="18" name="user_name">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="62" parent="18" name="user_pwd">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="63" parent="18" name="user_tel">
+      <Position>4</Position>
+      <Comment>ç”¨æˆ·ç”µè¯&#x9d;</Comment>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="64" parent="18" name="user_adr">
+      <Position>5</Position>
+      <Comment>å•†å®¶çš„åœ°å&#x9d;€</Comment>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="65" parent="18" name="user_type">
+      <Position>6</Position>
+      <Comment>æ ‡å¿—ç”¨æˆ·ç±»åž‹ æ™®é€šç”¨æˆ·/å•†å®¶</Comment>
+      <DataType>varchar(11)|0</DataType>
+    </column>
+    <column id="66" parent="18" name="user_sellername">
+      <Position>7</Position>
+      <Comment>å•†å®¶å&#x90;&#x8d;å­—</Comment>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="67" parent="18" name="user_avatar">
+      <Position>8</Position>
+      <Comment>ç”¨æˆ·å¤´åƒ&#x8f;</Comment>
+      <DataType>longtext|0</DataType>
+    </column>
+    <column id="68" parent="18" name="user_month_sale">
+      <Position>9</Position>
+      <Comment>å•†å®¶æœˆå”®é‡&#x8f;</Comment>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="69" parent="18" name="user_send_pay">
+      <Position>10</Position>
+      <Comment>å•†å®¶èµ·é€&#x81;ä»·</Comment>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="70" parent="18" name="user_distribution_pay">
+      <Position>11</Position>
+      <Comment>å•†å®¶é…&#x8d;é€&#x81;è´¹</Comment>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <key id="71" parent="18" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>user_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+  </database-model>
+</dataSource>

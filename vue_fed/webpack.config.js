@@ -45,6 +45,9 @@ module.exports = {
     }
   },
   devServer: {
+    proxy: { // proxy URLs to backend development server
+      '/ssm': 'http://localhost:8081'
+    },
     historyApiFallback: true,
     noInfo: true
   },
