@@ -49,9 +49,9 @@
 
 #### C端：
 
-<img src="https://assets.mgzf.com/appimg/1050be829b6831aa161d01153f61ed95.png" style="zoom:50%" />
+<img src="https://assets.mgzf.com/appimg/1050be829b6831aa161d01153f61ed95.png" style="zoom:30%" />
 
-<img src="https://assets.mgzf.com/appimg/50851fbf76a14be57d2fed1a973e455d.png" style="zoom:50%" />
+<img src="https://assets.mgzf.com/appimg/50851fbf76a14be57d2fed1a973e455d.png" style="zoom:40%" />
 
 <img src="https://assets.mgzf.com/appimg/52b9ad59e3befbca3fc43bb816566194.png" style="zoom:50%" />
 
