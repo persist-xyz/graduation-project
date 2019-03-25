@@ -47,7 +47,7 @@
 
 ### 软件截图
 
-#### C端：
+#### C端页面：
 
 <img src="https://assets.mgzf.com/appimg/1050be829b6831aa161d01153f61ed95.png" width="375" />
 
@@ -55,7 +55,7 @@
 
 <img src="https://assets.mgzf.com/appimg/52b9ad59e3befbca3fc43bb816566194.png" width="375" />
 
-<img src="https://assets.mgzf.com/appimg/77ed351bc9de28b03e8e2b3498b48304.png" width="375" />
+<img src="https://assets.mgzf.com/appimg/5fa7fcda6d4fb8ef75eaf0ce9dc29f22.png" width="375" />
 
 <img src="https://assets.mgzf.com/appimg/c2bafa7192a2cd1627541b6c45205c95.png" width="375" />
 
@@ -68,7 +68,7 @@
 <img src="https://assets.mgzf.com/appimg/9d0e5dd856021b86630fbb408f119f95.png" width="375" />
 
 
-#### B端：
+#### B端页面：
 
 <img src="https://assets.mgzf.com/appimg/7c811a632e1b89c06838aa708430a67b.png" width="375" />
 
